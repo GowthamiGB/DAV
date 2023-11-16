@@ -1,0 +1,17 @@
+import scrapy
+class QuoteSpider(scrapy.Spider):
+    name='lab1'
+    start_urls=['https://quotes.toscrape.com/']
+    
+    def parse(self, response):
+        #1.quotes 2.Author 3.tag
+        
+        all_div_quotes=response.css('div.quote')
+        title=all_div_quotes.css('span.text::text').extract()
+        author=all_div_quotes.css('.author::text').extract()
+        tag=all_div_quotes.css('.tag::text').extract()
+        for i in range(len(title)): 
+            yield{'Title':title[i],
+              'Author':author[i],
+              'Tag':tag[i]
+            }

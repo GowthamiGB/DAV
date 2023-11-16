@@ -1,0 +1,9 @@
+import scrapy
+class QuoteSpider(scrapy.Spider):
+    name='lab1'
+    start_urls=['https://quotes.toscrape.com/']
+    
+    def parse(self, response):
+        title=response.css('title::text').extract()
+        yield{'titletest':title}
+                               
